@@ -1,0 +1,34 @@
+---
+const {project} = Astro.props
+---
+
+<div class="project hidden">
+    <figure class="image">
+      <img src={project.data.image} />
+    </figure>
+    <div class="description">
+      <h2>{project.data.title}</h2>
+      <p>
+        {project.data.description}
+      </p>
+      <p>
+        {project.data.tools.map((tool: string) => <span class="tool">{tool}</span>)}
+       
+      </p>
+
+      <div class="btns">
+        <a
+          href={project.data.liveLink}
+          class="btn"
+          target="_blank"
+          >Live</a
+        >
+        <a
+          href={project.data.codeLink}
+          class="btn"
+          target="_blank"
+          >Code <i class="fab fa-github"></i
+        ></a>
+      </div>
+    </div>
+  </div>

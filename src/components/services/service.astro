@@ -1,0 +1,10 @@
+---
+const {service, animateClass} = Astro.props
+---
+
+<div class={`service hiddenSlideLeft`}>
+    <h2 class="service-title">{service.data.title}</h2>
+    <p class="service-description">
+      {service.data.description}
+    </p>
+  </div>

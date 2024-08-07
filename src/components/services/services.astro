@@ -1,7 +1,16 @@
+---
+import { getCollection } from 'astro:content';
+import Service from './service.astro';
+const services = await getCollection('services');
+
+---
+
 <section id="services">
     <h2 class="heading"><span>Services</span></h2>
+
     <div class="services__content">
-      <div class="service hiddenSlideLeft">
+      {services.map(service => <Service service={service} />)}
+      <!-- <div class="service hiddenSlideLeft">
         <h2 class="service-title">Frontend Development</h2>
         <p class="service-description">
           Building responsive and user-friendly web interfaces using React,
@@ -21,6 +30,6 @@
           Designing and managing databases with MySQL or other database
           systems for efficient data storage.
         </p>
-      </div>
+      </div> -->
     </div>
   </section>

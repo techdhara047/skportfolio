@@ -93,6 +93,7 @@ import Header from '../components/header/header.astro';
 </html>
 
 <script>
+	
 	// change theme
 function init ():void {
   const theme = localStorage.getItem("theme") || "";
@@ -111,7 +112,7 @@ function changeTheme():void {
 
   // const currentTheme = document.documentElement.getAttribute("data-theme");
   const newTheme = theme === "dark" ? "" : "dark";
-  console.log(theme, newTheme);
+  console.log(theme)
   document.documentElement.setAttribute("data-theme", newTheme);
   localStorage.setItem("theme", newTheme);
 

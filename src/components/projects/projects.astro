@@ -1,8 +1,19 @@
+---
+import { getCollection } from 'astro:content';
+import Project from './project.astro';
 
+const projects = await getCollection('projects');
+
+
+---
 
 <section id="projects" class="projects">
+
     <h2 class="heading"><span>Projects</span></h2>
-    <div class="project hidden">
+
+    {projects.map(project => <Project project={project}/>)}
+  
+    <!-- <div class="project hidden">
       <figure class="image">
         <img src="../src/images/quizkosh.png" />
       </figure>
@@ -88,5 +99,5 @@
           ></a>
         </div>
       </div>
-    </div>
+    </div> -->
   </section>
