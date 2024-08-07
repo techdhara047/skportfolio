@@ -1,5 +1,10 @@
 ---
-
+import Image from 'astro/components/Image.astro';
+import '../styles/style.css';
+import Projects from '../components/projects/projects.astro';
+import Services from '../components/services/services.astro';
+import Contact from '../components/contact/contact.astro';
+import Header from '../components/header/header.astro';
 ---
 
 <html lang="en">
@@ -8,9 +13,142 @@
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>Portfolio</title>
+		<link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+	<!-- <link rel="stylesheet" href="style.css"> -->
 	</head>
 	<body>
-		<h1>Astro</h1>
-	</body>
+		<button id="theme-toggle">
+		  <i id="theme-icon" class="fas fa-sun"></i>
+		</button>
+		<div class="nav-list">
+		  <span class="cancel"><i class="fa-sharp fa-solid fa-xmark"></i></span>
+		  <ul>
+			<li><a href="#home" class="nav-link">Home</a></li>
+			<li><a href="#projects" class="nav-link">Projects</a></li>
+			<li><a href="#services" class="nav-link">Services</a></li>
+			<li><a href="#contact" class="nav-link">Contact Me</a></li>
+		  </ul>
+		</div>
+		<!-- fixed header -->
+		<header class="fixed-nav">
+		  <nav>
+			<ul>
+			  <li class="logo">𝒜𝓈𝒽𝓊𝓉𝑜𝓈𝒽</li>
+			</ul>
+			<ul>
+			  <li class="menu-icon"><i class="fa-solid fa-bars"></i></li>
+			</ul>
+	
+			<ul class="right-nav">
+			  <li><a href="#home" class="link">Home</a></li>
+			  <li><a href="#projects" class="link">Projects</a></li>
+			  <li><a href="#services" class="link">Services</a></li>
+			  <li><a href="#contact" class="link">Contact Me</a></li>
+			</ul>
+		  </nav>
+		</header>
+		<div class="container">
+		  <!-- header section -->
+		<Header />
+		  <!-- nav list -->
+	
+		  <!-- about section -->
+		  <section class="about" id="home">
+			<div class="left">
+			  <div class="head hidden">
+				<h1>Hello, I'm Ashutosh Singh</h1>
+				<h3 class="sub-heading"><span></span>Full Stack Developer </h3>
+			  </div>
+	
+			  <div class="foot hidden">
+				<a
+				  class="btn"
+				  href="https://drive.google.com/file/d/1S1xF0UyxoeRXCxC9v3YvuWrhS5X5_rZ-/view?usp=sharing"
+				  target="_blank"
+				  >Resume</a
+				>
+				<a class="btn" href="#contact">Contact Me</a>
+			  </div>
+			</div>
+			<div class="right hidden">
+			  <div class="circle-1">
+				<!-- <Image src="../images/pic4.jpeg" alt="" /> -->
+				<img src="../src/images/pic4.jpeg" alt="" />
+			  </div>
+			</div>
+		  </section>
+		  <!-- projects section -->
+		  <Projects />
+		  <!-- services section -->
+		  <Services />
+		  <!-- contact me section -->
+		<Contact />
+		</div>
+		
+	  </body>
 </html>
+
+<script>
+	// change theme
+function init ():void {
+  const theme = localStorage.getItem("theme") || "";
+  document.documentElement.setAttribute("data-theme",theme);
+}
+init();
+
+
+// toggle theme
+(document.getElementById("theme-toggle")!).addEventListener("click", function () {
+  changeTheme();
+});
+
+function changeTheme():void {
+  const theme = localStorage.getItem("theme") || "";
+
+  // const currentTheme = document.documentElement.getAttribute("data-theme");
+  const newTheme = theme === "dark" ? "" : "dark";
+  console.log(theme, newTheme);
+  document.documentElement.setAttribute("data-theme", newTheme);
+  localStorage.setItem("theme", newTheme);
+
+  // Update icon based on theme
+  const themeIcon = document.getElementById("theme-icon")!;
+  if (newTheme !== "dark") {
+    themeIcon.classList.remove("fa-moon");
+    themeIcon.classList.add("fa-sun");
+  } else {
+    themeIcon.classList.remove("fa-sun");
+    themeIcon.classList.add("fa-moon");
+  }
+}
+
+// element entry animation
+const obaserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("show");
+    }
+  });
+});
+
+const hiddenElm = document.querySelectorAll(".hidden");
+const hiddenFadeElm = document.querySelectorAll(".hiddenFadeIn");
+const hiddenSlide = document.querySelectorAll(".hiddenSlide");
+const hiddenSlideLeftElm = document.querySelectorAll(".hiddenSlideLeft");
+const hiddenSlideRightElm = document.querySelectorAll(".hiddenSlideRight");
+// add oberver
+[
+  hiddenElm,
+  hiddenFadeElm,
+  hiddenSlideLeftElm,
+  hiddenSlideRightElm,
+  hiddenSlide,
+].forEach((elm) => {
+  elm.forEach((el) => obaserver.observe(el));
+});
+
+</script>
