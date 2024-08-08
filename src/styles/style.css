@@ -129,6 +129,9 @@ section {
 }
 /* header */
 header {
+  z-index: 3000;
+  position: sticky;
+  top: 0;
   background-color: var(--header-bg-color);
   /* color: var(--text-special-color); */
   font-size: minmax(0.8rem, 1.2rem);

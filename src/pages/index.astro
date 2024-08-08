@@ -35,7 +35,7 @@ import pic from '../assets/pic4.jpeg'
 		  </ul>
 		</div>
 		<!-- fixed header -->
-		<header class="fixed-nav">
+		<!-- <header class="fixed-nav">
 		  <nav>
 			<ul>
 			  <li class="logo">𝒜𝓈𝒽𝓊𝓉𝑜𝓈𝒽</li>
@@ -51,7 +51,7 @@ import pic from '../assets/pic4.jpeg'
 			  <li><a href="#contact" class="link">Contact Me</a></li>
 			</ul>
 		  </nav>
-		</header>
+		</header> -->
 		<div class="container">
 		  <!-- header section -->
 		<Header />
@@ -96,10 +96,16 @@ import pic from '../assets/pic4.jpeg'
 
 <script>
 	
+	
 	// change theme
 function init ():void {
   const theme = localStorage.getItem("theme") || "";
   document.documentElement.setAttribute("data-theme",theme);
+  // select home nav link on initialization
+  const homeAnchorElements = document.querySelectorAll<HTMLAnchorElement>('a[href="#home"]');
+	homeAnchorElements.forEach(anchor => anchor.classList.add("active"))
+	// goto top 
+	window.scrollTo(0, 0);
 }
 init();
 
@@ -153,5 +159,94 @@ const hiddenSlideRightElm = document.querySelectorAll(".hiddenSlideRight");
 ].forEach((elm) => {
   elm.forEach((el) => obaserver.observe(el));
 });
+
+
+// nav links
+document.querySelectorAll(".nav-link").forEach((link) => {
+  link.addEventListener("click", () => {
+    document.body.style.overflow = "";
+    (document.querySelector(".nav-list") as HTMLDivElement).style.display = "none";
+  });
+});
+// Menu icon
+document.querySelectorAll(".menu-icon").forEach((el) => {
+  el.addEventListener("click", () => {
+    console.log("menu icon clicked");
+
+    const menuIcon = document.querySelector(".nav-list") as HTMLDivElement;
+    if (menuIcon.style.display === "none" || menuIcon.style.display === "") {
+      document.body.style.overflow = "hidden";
+      menuIcon.style.display = "block";
+    } else {
+      document.body.style.overflow = ""; // Reset to default
+      menuIcon.style.display = "none";
+    }
+  });
+});
+
+// Cancel menu list
+document.querySelector(".cancel")!.addEventListener("click", () => {
+  const menuIcon = document.querySelector(".nav-list") as HTMLDivElement;
+  document.body.style.overflow = ""; // Reset to default
+  menuIcon.style.display = "none";
+});
+
+// fixed navbar
+window.addEventListener("scroll", (e) => {
+  // Get the current scroll position
+  const scrollTop =
+    document.documentElement.scrollTop || document.body.scrollTop;
+  // hide and show fixed nav
+
+  const fixedNav = document.querySelector(".fixed-nav") as HTMLDivElement;
+  const Nav = document.querySelector(".nav");
+  if (scrollTop > 200) {
+    fixedNav.style.transform = "translateY(0%)";
+    // Nav.style.display = "none";
+  } else {
+    fixedNav.style.transform = "translateY(-100%)";
+    // Nav.style.display = "block";
+  }
+});
+
+
+// Select all <a> elements with class .link
+	const links = document.querySelectorAll<HTMLAnchorElement>("a.link");
+const navLinks = document.querySelectorAll<HTMLAnchorElement>("a.nav-link");
+links.forEach((link) => {
+	
+  scrollToView(link, links);
+});
+navLinks.forEach((link) => {
+  scrollToView(link, navLinks);
+});
+function scrollToView(link: HTMLAnchorElement, links:NodeListOf<HTMLAnchorElement>) {
+  link.addEventListener("click", function (event) {
+    // Prevent default anchor click behavior
+    event.preventDefault();
+
+    // Remove 'active' class from all links
+    links.forEach((l) => l.classList.remove("active"));
+
+    // Add 'active' class to the clicked link
+    this.classList.add("active");
+
+    // Scroll to the target section
+    const targetId = this.getAttribute("href")!.substring(1);
+    const targetElement = document.getElementById(targetId) as HTMLDivElement;
+    if (targetId === "home") {
+      // Scroll to the top of the viewport if target ID is 'home'
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    } else {
+      targetElement.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Ensures the target element is aligned to the top of the viewport
+      });
+    }
+  });
+}
 
 </script>
