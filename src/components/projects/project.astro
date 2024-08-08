@@ -1,10 +1,11 @@
 ---
+import { Image } from "astro:assets"
 const {project} = Astro.props
 ---
 
 <div class="project hidden">
     <figure class="image">
-      <img src={project.data.image} />
+      <Image src={project.data.image} alt={project.data.title} format="avif"/>
     </figure>
     <div class="description">
       <h2>{project.data.title}</h2>
