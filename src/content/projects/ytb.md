@@ -4,5 +4,5 @@ description: "most viewed videos using YouTube APIs. Built with Node.js, EJS, an
 image: "./ytb.jpg"
 tools: ["React", "Node.js"]
 liveLink: "https://scintillating-raindrop-6d81b4.netlify.app/"
-codeLink: "https://github.com/ashuhitman/LibraryUserTrackerUI"
+codeLink: "https://scintillating-raindrop-6d81b4.netlify.app/"
 ---
