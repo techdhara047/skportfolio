@@ -5,6 +5,6 @@ app similar to Swiggy. This app will feature a user-friendly interface, order ma
 and responsive design to enhance the food delivery experience."
 image: "./food.jpg"
 tools: ["React", "Redux", "Material UI","Nodejs"]
-liveLink: "https://keen-lokum-279032.netlify.app/"
-codeLink: "https://github.com/ashuhitman/quizkosh"
+liveLink: "https://super-hamster-90f635.netlify.app/"
+codeLink: "https://github.com/SalamanKhan7/Food-Delivery-App"
 ---
